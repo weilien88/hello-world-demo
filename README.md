@@ -1,5 +1,10 @@
 # Hello Desk
 
+## Live demo
+
+- GitHub Pages: https://weilien88.github.io/hello-world-demo/
+- Cloudflare: https://kai-codex-hello-7f9c2a61.kai-demo-7f9c2a61.workers.dev/
+
 Open `index.html` directly in a browser. This static page has no build step, dependencies, or runtime network requests. Your name, language, theme, and waves stay in this browser's local storage.
 
 The Cloudflare Worker module is generated from the same root `index.html` used by GitHub Pages. Regenerate it with `node scripts/build-worker.mjs`. No hosting changes are performed by this command.
