@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {test} from 'node:test';
+import {build,generateWorker} from '../scripts/build-worker.mjs';
+const load=source=>import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+await test('static page and Worker round trip',async()=>{await build();const html=await readFile(new URL('../index.html',import.meta.url),'utf8');const worker=await load(await readFile(new URL('../cloudflare/worker.js',import.meta.url),'utf8'));const response=worker.default.fetch();assert.equal(response.headers.get('content-type'),'text/html; charset=utf-8');assert.equal(await response.text(),html);const hostile='` ${sequence}\n</script> é';assert.equal(await (await load(generateWorker(hostile))).default.fetch().text(),hostile);assert.deepEqual(JSON.parse(await readFile(new URL('../cloudflare/metadata.json',import.meta.url),'utf8')),{main_module:'worker.js',compatibility_date:'2026-11-06',bindings:[]});assert.doesNotMatch(html,/https?:/);for(const id of ['greeting','kicker','name','clear-name','name-empty','wave','waves','wave-count','wave-status','wave-empty','live','storage-note','arc'])assert.match(html,new RegExp('id="'+id+'"'));for(const lang of ['en','es','fr','ja','ar'])assert.ok(html.includes('data-lang="'+lang+'"'));for(const theme of ['ink','paper','lagoon'])assert.ok(html.includes('data-theme="'+theme+'"'));assert.ok(html.includes('<!-- build-escape: backtick ` and template ${sequence} stay literal -->'));});
+console.log('SMOKE_OK');
