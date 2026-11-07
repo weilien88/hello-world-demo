@@ -3,19 +3,149 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello World</title>
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="A small hello to a world of possibilities. Built with Codex and published on GitHub Pages.">
+  <title>Hello, World.</title>
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #101827; color: #f8fafc; font-family: system-ui, sans-serif; }
-    main { width: 100%; max-width: 620px; padding: 64px 32px; text-align: center; background: #19263b; border: 1px solid #33445d; border-radius: 24px; box-shadow: 0 24px 64px #0003; }
-    h1 { margin: 0 0 16px; font-size: clamp(40px, 8vw, 64px); letter-spacing: -0.05em; }
-    p { margin: 0; color: #becde0; font-size: 18px; line-height: 1.6; }
+
+    html { background: #0c1020; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: clamp(20px, 5vw, 64px);
+      position: relative;
+      isolation: isolate;
+      background: #0c1020;
+      color: #f7f6ff;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: linear-gradient(125deg, #141c42, #492659, #183e50, #242047);
+      background-size: 300% 300%;
+      animation: aurora 24s ease-in-out infinite alternate;
+    }
+
+    main {
+      width: 100%;
+      max-width: 960px;
+      overflow-wrap: anywhere;
+      padding: clamp(28px, 7vw, 80px);
+      background: #101526;
+      border: 1px solid #44465f;
+      border-radius: clamp(24px, 4vw, 40px);
+      box-shadow: 0 32px 100px #05081766;
+      animation: arrive 900ms cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    .eyebrow, .signature, footer {
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 clamp(36px, 6vw, 64px);
+      color: #d7c9ff;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      flex: 0 0 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #b8efcf;
+      box-shadow: 0 0 18px #b8efcf55;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(56px, 11vw, 116px);
+      font-weight: 750;
+      line-height: 1.02;
+      letter-spacing: -.065em;
+    }
+
+    h1 span { color: #c8b5ff; }
+    h1 .period { color: #ffb9a6; }
+
+    .intro {
+      max-width: 440px;
+      margin: 28px 0 0;
+      color: #c3c8d9;
+      font-size: clamp(17px, 2.5vw, 21px);
+      line-height: 1.7;
+      letter-spacing: -.015em;
+    }
+
+    .signature {
+      margin: 36px 0 0;
+      color: #b8efcf;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .signature span { color: #a6adc5; }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px 24px;
+      margin-top: clamp(48px, 8vw, 80px);
+      padding-top: 24px;
+      border-top: 1px solid #343b51;
+      color: #a6adc5;
+      font-size: 11px;
+      line-height: 1.8;
+      letter-spacing: .03em;
+    }
+
+    footer p { margin: 0; }
+    ::selection { background: #c8b5ff; color: #101526; }
+
+    @keyframes aurora {
+      from { background-position: 0% 30%; }
+      to { background-position: 100% 70%; }
+    }
+
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Hello World</h1>
-    <p>Built with Codex, deployed on Cloudflare Workers.</p>
+  <main aria-labelledby="greeting">
+    <p class="eyebrow">A little corner of the internet</p>
+    <h1 id="greeting">Hello,<br><span>World<span class="period">.</span></span></h1>
+    <p class="intro">Every great idea starts with a simple hello. Here’s to whatever comes next.</p>
+    <p class="signature"><span aria-hidden="true">&gt; </span>Small page. Endless possibilities.</p>
+    <footer>
+      <p>Built with Codex</p>
+      <p>Published on GitHub Pages</p>
+    </footer>
   </main>
 </body>
 </html>
